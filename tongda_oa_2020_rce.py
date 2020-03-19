@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 # -*- encoding: utf-8 -*-
 # author: Chaser
+# 通达OA未授权任意文件上传及文件包含导致远程代码执行漏洞
 
 import sys
 import requests
