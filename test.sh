@@ -1,4 +1,5 @@
 #!/bin/bash
+# 参考来源：https://www.cnblogs.com/xiaozi/p/9561543.html
 i=1
 while :
 do
